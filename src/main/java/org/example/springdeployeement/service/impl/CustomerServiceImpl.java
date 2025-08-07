@@ -1,5 +1,6 @@
 package org.example.springdeployeement.service.impl;
 
+import jakarta.transaction.Transactional;
 import org.example.springdeployeement.entity.Customer;
 import org.example.springdeployeement.repo.CustomerRepo;
 import org.example.springdeployeement.service.CustomerService;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@Transactional
 public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepo customerRepo;
 
@@ -26,12 +28,12 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer update(Customer customer) {
-        return customerRepo.save(customer);
+    public void update(Customer customer) {
+         customerRepo.update(customer.getName(), customer.getEmail(), customer.getAddress(), customer.getId());
     }
 
     @Override
     public void delete(Long id) {
-
+        customerRepo.deleteById(id);
     }
 }

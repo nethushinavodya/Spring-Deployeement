@@ -26,8 +26,8 @@ public class CustomerController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer) {
-        return ResponseEntity.ok(customerService.update(customer));
+    public void updateCustomer(@RequestBody Customer customer) {
+        customerService.update(customer);
     }
 
     @DeleteMapping("/delete/{id}")
